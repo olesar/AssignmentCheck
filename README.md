@@ -16,3 +16,5 @@ Get the development version from GitHub:
 install.packages("devtools")
 devtools::install_github("agricolamz/AssignmentCheck")
 ```
+
+For a detailed tutorial see [GitHub pages](https://agricolamz.github.io/AssignmentCheck/).
