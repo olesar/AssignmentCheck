@@ -6,7 +6,7 @@ Date: 2017-03-14
 Depends: R (>= 2.10)
 Author: George Moroz
 Maintainer: George Moroz <agricolamz@gmail.com>
-Description: This package is designed for student's assignments automatic test. I expect students to send me an rmarkdown with work and package automatically cheks all works.
+Description: This package is designed for student's assignments automatic test. I expect students to send me an rmarkdown with work and package automatically cheks all works. 
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
