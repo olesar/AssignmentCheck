@@ -1,0 +1,23 @@
+---
+title: "test"
+author: "Amy Lawrence"
+date: '14 марта 2017 г '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### 1.1
+Tro-lo-lo
+```{r pressure, echo=FALSE}
+2+6
+```
+
+### 1.2
+Tro-lo-lo
+```{r pressure, echo=FALSE}
+fit <- lm(mpg~cyl, mtcars)
+fit$coefficients
+```

@@ -1,0 +1,23 @@
+---
+title: "test"
+author: "Tom Sawyer"
+date: '14-03-2017'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### 1.1
+Tro-lo-lo
+```{r pressure, echo=FALSE}
+2+2
+```
+
+### 1.2
+Tro-lo-lo
+```{r pressure, echo=FALSE}
+fit <- lm(mpg~cyl, mtcars)
+fit$coefficients
+```

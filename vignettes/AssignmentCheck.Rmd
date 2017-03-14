@@ -9,8 +9,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-## 1. Installation
-Since `lingtypology` is an R package, you should install [R](https://www.r-project.org/) on your PC if you haven't already done so. To install the `lingtypology` package, run the following command at your R IDE, so you can also get the development version from GitHub:
+### 1. Installation
+Since `AssignmentCheck` is an R package, you should install [R](https://www.r-project.org/) on your PC if you haven't already done so. To install the `AssignmentCheck` package, run the following command at your R IDE, so you can also get the development version from GitHub:
 ```{r, eval= F}
 install.packages("devtools")
 devtools::install_github("agricolamz/AssignmentCheck")
@@ -21,24 +21,32 @@ Load package:
 library(AssignmentCheck)
 ```
 
-## 2. Checks
+### 2. Checks
 Imagine that we have a directory with some files from your students
-```{bash}
-cd /home/agricolamz/_DATA/OneDrive1/_Work/github/markdown_check/tests
-ls
+```{r, eval=FALSE}
+list.files()
+```
+```{r, echo= FALSE}
+my_files <- c("test_1.Rmd", "test_2.Rmd", "test_3.Rmd", "test_4.Rmd", "test.txt")
+my_files
 ```
 
-As you can see, there are `.Rmd` files, and one `.txt` file. `test_files` function can take all `.Rmd` files and check, whether `R` code in `R` chunks produce the same result that we expected.
+As you can see, there are `.Rmd` files, and one `.txt` file. This files have awfull names, but believe me: even if you ask your student to name files during some pattern, you will recieve a couple files with nasty names. `test_files` function can take all `.Rmd` files and check, whether `R` code in `R` chunks produce the same result that we expected. Our expectations should be provided via `list()`.
 
-```{r}
-setwd("/home/agricolamz/_DATA/OneDrive1/_Work/github/markdown_check/tests")
+```{r, eval=FALSE}
 fit <- lm(mpg~cyl, mtcars)
 test_files(expectations = list(4, fit$coefficients))
 ```
+```{r, echo=FALSE}
+fit <- lm(mpg~cyl, mtcars)
+test_files(files = my_files, expectations = list(4, fit$coefficients))
+```
+
+As you can see, there are students name from `name:` field, and summary on each student.
 
 There is a variable `keyword_prefix` that defines the common part of the keywords, so you can ask your students to put their answer code chunks after some keywords. By default `keyword_prefix` is `"### "`, so your students can write "### 1.1", "### 1.2" and so on. But you can specify your own prefixes.
 
-## 3. Citing `AssignmentCheck`
+### 3. Citing `AssignmentCheck`
 It is important to cite R and R packages when you use them. For this purpose use the `citation` function in R:
 ```{r}
 citation("AssignmentCheck")

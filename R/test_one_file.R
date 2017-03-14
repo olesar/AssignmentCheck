@@ -36,6 +36,6 @@ test_one_file <- function(expectations, file, keyword_prefix = "### "){
   names(results) <- keywords
   rownames(results) <- NULL
   results <- cbind(file_name, author, results)
-  results$results <- sum(unlist(results[, -1]))
+  results$results <- sum(unlist(results[, -c(1:2)]))
   results
 }
