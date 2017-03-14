@@ -13,4 +13,6 @@ LazyData: true
 URL: https://github.com/agricolamz/AssignmentCheck/
 BugReports: https://github.com/agricolamz/AssignmentCheck/issues
 RoxygenNote: 5.0.1
+Suggests:
+    knitr
 VignetteBuilder: knitr
