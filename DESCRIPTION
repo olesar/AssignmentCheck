@@ -1,0 +1,15 @@
+Package: AssignmentCheck
+Type: Package
+Title: Check r cjunks in rmarkdown files
+Version: 0.1.0
+Date: 2017-03-14
+Depends: R (>= 2.10)
+Author: George Moroz
+Maintainer: George Moroz <agricolamz@gmail.com>
+Description: This package is designed for student's assignments automatic test. I expect students to send me an rmarkdown with work and package automatically cheks all works.
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/agricolamz/AssignmentCheck/
+BugReports: https://github.com/agricolamz/AssignmentCheck/issues
+RoxygenNote: 5.0.1
