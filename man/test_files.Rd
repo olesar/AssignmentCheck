@@ -2,14 +2,13 @@
 % Please edit documentation in R/test_files.R
 \name{test_files}
 \alias{test_files}
-\title{Test all tasks in all rmarkdown files
-This function takes all files in directory, searches all kye_words using key_word_prefix argument and then tests associated with all keywords r chunks. Then function compare the results with the expected value and return a dataframe containing file name, author, check results and number of corrected answers.}
+\title{Test all tasks in all rmarkdown files}
 \usage{
 test_files(expectations, files = list.files(), keyword_prefix = "### ",
   group = FALSE)
 }
 \arguments{
-\item{expectations}{an expected value.}
+\item{expectations}{an expected values.}
 
 \item{files}{an rmarkdown files. By dafault is all .Rmd files in a working directory.}
 
@@ -18,7 +17,6 @@ test_files(expectations, files = list.files(), keyword_prefix = "### ",
 \item{group}{logical. If TRUE, function searches first line with the "group:" argument and returns it in the summary.}
 }
 \description{
-Test all tasks in all rmarkdown files
 This function takes all files in directory, searches all kye_words using key_word_prefix argument and then tests associated with all keywords r chunks. Then function compare the results with the expected value and return a dataframe containing file name, author, check results and number of corrected answers.
 }
 \examples{

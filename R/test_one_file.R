@@ -1,12 +1,12 @@
 #' Test all tasks in rmarkdown file
-
+#'
 #' This function takes a file, searches all kye_words using key_word_prefix argument and then tests associated with all keywords r chunks. Then function compare the results with the expected value and return a dataframe containing file name, author, check results and number of corrected answers.
 #' @param file an rmarkdown file or an r charactor vector.
-#' @param expectations an expected value.
+#' @param expectations an expected values.
 #' @param keyword_prefix a common part of all keywords. By default is "### ".
 #' @param group logical. If TRUE, function searches first line with the "group:" argument and returns it in the summary.
 #' @author George Moroz <agricolamz@gmail.com>
-#' @examples
+#' # @examples
 #' fit <- lm(mpg~cyl, mtcars)
 #' test_one_file(list(2+2, fit$coefficients), test_1)
 #' test_one_file(list(2+2, 42), test_1)

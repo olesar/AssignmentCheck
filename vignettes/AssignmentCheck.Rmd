@@ -22,7 +22,7 @@ library(AssignmentCheck)
 ```
 
 ### 2. Checks
-Imagine that we have a directory with some files from your students
+Imagine that we have a directory with some files from our students
 ```{r, eval=FALSE}
 list.files()
 ```
@@ -31,7 +31,30 @@ my_files <- c("test_1.Rmd", "test_2.Rmd", "test_3.Rmd", "test_4.Rmd", "test.txt"
 my_files
 ```
 
-As you can see, there are `.Rmd` files, and one `.txt` file. This files have awfull names, but believe me: even if you ask your student to name files during some pattern, you will recieve a couple files with nasty names. `test_files` function can take all `.Rmd` files and check, whether `R` code in `R` chunks produce the same result that we expected. Our expectations should be provided via `list()`.
+As you can see, there are `.Rmd` files, and one `.txt` file. These files have awfull names, but believe me: even if you ask your student to name files during some pattern, you will recieve a couple files with nasty names. Lets look inside of one of them:
+```{r, eval=FALSE}
+readLines("test_1.Rmd")
+```
+```{r, echo= FALSE}
+my_files <- c(
+  system.file("extdata", "test_1.Rmd", package = "AssignmentCheck"),
+  system.file("extdata", "test_2.Rmd", package = "AssignmentCheck"),
+  system.file("extdata", "test_3.Rmd", package = "AssignmentCheck"),
+  system.file("extdata", "test_4.Rmd", package = "AssignmentCheck")
+)
+readLines(my_files[1])
+```
+
+As a teacher you can make your own correct file and create an expectations object using `make_expectations` function. Lets make `test_1.Rmd` the base correct file:
+
+```{r, eval=FALSE}
+make_expectations("test_1.Rmd")
+```
+```{r, echo= FALSE}
+make_expectations(my_files[1])
+```
+
+So that correct answers you can provide to the `test_files`. This function takes all `.Rmd` files and check, whether `R` code in `R` chunks produces the same result that we expected. Our expectations should be provided via `list()`.
 
 ```{r, eval=FALSE}
 fit <- lm(mpg~cyl, mtcars)
@@ -39,19 +62,21 @@ test_files(expectations = list(4, fit$coefficients))
 ```
 ```{r, echo=FALSE}
 fit <- lm(mpg~cyl, mtcars)
-my_files <- c(
-  system.file("extdata", "test_1.Rmd", package = "AssignmentCheck"),
-  system.file("extdata", "test_2.Rmd", package = "AssignmentCheck"),
-  system.file("extdata", "test_3.Rmd", package = "AssignmentCheck"),
-  system.file("extdata", "test_4.Rmd", package = "AssignmentCheck")
-)
-
 test_files(files = my_files, expectations = list(4, fit$coefficients))
 ```
 
 As you can see, there are students name from `name:` field, and summary on each student.
 
 There is a variable `keyword_prefix` that defines the common part of the keywords, so you can ask your students to put their answer code chunks after some keywords. By default `keyword_prefix` is `"### "`, so your students can write "### 1.1", "### 1.2" and so on. But you can specify your own prefixes.
+
+If we combine both `test_files` and `make_expectations` functions we can get the same summary for all students:
+
+```{r, eval=FALSE}
+test_files(expectations = make_expectations("test_1.Rmd"))
+```
+```{r, echo=FALSE}
+test_files(files = my_files, expectations = make_expectations(my_files[1]))
+```
 
 ### 3. Citing `AssignmentCheck`
 It is important to cite R and R packages when you use them. For this purpose use the `citation` function in R:

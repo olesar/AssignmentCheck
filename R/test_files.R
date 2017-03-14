@@ -1,8 +1,8 @@
 #' Test all tasks in all rmarkdown files
-
+#'
 #' This function takes all files in directory, searches all kye_words using key_word_prefix argument and then tests associated with all keywords r chunks. Then function compare the results with the expected value and return a dataframe containing file name, author, check results and number of corrected answers.
 #' @param files an rmarkdown files. By dafault is all .Rmd files in a working directory.
-#' @param expectations an expected value.
+#' @param expectations an expected values.
 #' @param keyword_prefix a common part of all keywords. By default is "### ".
 #' @param group logical. If TRUE, function searches first line with the "group:" argument and returns it in the summary.
 #' @author George Moroz <agricolamz@gmail.com>
