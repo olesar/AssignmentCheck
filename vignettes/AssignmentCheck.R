@@ -18,6 +18,13 @@ my_files
 
 ## ---- echo=FALSE---------------------------------------------------------
 fit <- lm(mpg~cyl, mtcars)
+my_files <- c(
+  system.file("extdata", "test_1.Rmd", package = "AssignmentCheck"),
+  system.file("extdata", "test_2.Rmd", package = "AssignmentCheck"),
+  system.file("extdata", "test_3.Rmd", package = "AssignmentCheck"),
+  system.file("extdata", "test_4.Rmd", package = "AssignmentCheck")
+)
+
 test_files(files = my_files, expectations = list(4, fit$coefficients))
 
 ## ------------------------------------------------------------------------

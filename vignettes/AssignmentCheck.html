@@ -12,7 +12,7 @@
 
 <meta name="author" content="George Moroz" />
 
-<meta name="date" content="2017-03-14" />
+<meta name="date" content="2017-03-15" />
 
 <title>AssignmentCheck: automatic check for your students</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore"><code>AssignmentCheck</code>: automatic check for your students</h1>
 <h4 class="author"><em>George Moroz</em></h4>
-<h4 class="date"><em>2017-03-14</em></h4>
+<h4 class="date"><em>2017-03-15</em></h4>
 
 
 
@@ -90,11 +90,16 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;agricola
 <p>As you can see, there are <code>.Rmd</code> files, and one <code>.txt</code> file. This files have awfull names, but believe me: even if you ask your student to name files during some pattern, you will recieve a couple files with nasty names. <code>test_files</code> function can take all <code>.Rmd</code> files and check, whether <code>R</code> code in <code>R</code> chunks produce the same result that we expected. Our expectations should be provided via <code>list()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg~cyl, mtcars)
 <span class="kw">test_files</span>(<span class="dt">expectations =</span> <span class="kw">list</span>(<span class="dv">4</span>, fit$coefficients))</code></pre></div>
-<pre><code>##    file_name           author ### 1.1 ### 1.2 results
-## 1 test_1.Rmd       Tom Sawyer    TRUE    TRUE       2
-## 2 test_2.Rmd Huckleberry Finn    TRUE    TRUE       2
-## 3 test_3.Rmd       Joe Harper   FALSE    TRUE       1
-## 4 test_4.Rmd     Amy Lawrence   FALSE    TRUE       1</code></pre>
+<pre><code>##                                                                                              file_name
+## 1 /home/agricolamz/_DATA/OneDrive1/_Work/github/markdown_check/AssignmentCheck/inst/extdata/test_1.Rmd
+## 2 /home/agricolamz/_DATA/OneDrive1/_Work/github/markdown_check/AssignmentCheck/inst/extdata/test_2.Rmd
+## 3 /home/agricolamz/_DATA/OneDrive1/_Work/github/markdown_check/AssignmentCheck/inst/extdata/test_3.Rmd
+## 4 /home/agricolamz/_DATA/OneDrive1/_Work/github/markdown_check/AssignmentCheck/inst/extdata/test_4.Rmd
+##             author ### 1.1 ### 1.2 results
+## 1       Tom Sawyer    TRUE    TRUE       2
+## 2 Huckleberry Finn    TRUE    TRUE       2
+## 3       Joe Harper   FALSE    TRUE       1
+## 4     Amy Lawrence   FALSE    TRUE       1</code></pre>
 <p>As you can see, there are students name from <code>name:</code> field, and summary on each student.</p>
 <p>There is a variable <code>keyword_prefix</code> that defines the common part of the keywords, so you can ask your students to put their answer code chunks after some keywords. By default <code>keyword_prefix</code> is <code>&quot;### &quot;</code>, so your students can write “### 1.1”, “### 1.2” and so on. But you can specify your own prefixes.</p>
 </div>

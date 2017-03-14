@@ -16,16 +16,11 @@ test_one_file <- function(expectations, file, keyword_prefix = "### ", group = F
   # is file just a name or a whole file? ------------------------------------
   if(length(file) == 1){
     work <- readLines(file)
-    file_name <- file
+    file_name <- unlist(strsplit(file, split = "/"))
+    file_name <- file_name[length(file_name)]
   } else{
     work <- file
     file_name <- deparse(substitute(file))
-  }
-
-  if(group == TRUE){
-    group_name <- substring(work[grep("group", work)][1],
-                            9,
-                            nchar(work[grep("author", work)])-1)
   }
 
   author <- substring(work[grep("author", work)][1],
@@ -42,7 +37,15 @@ test_one_file <- function(expectations, file, keyword_prefix = "### ", group = F
   results <- data.frame(t(data.frame(checks)))
   names(results) <- keywords
   rownames(results) <- NULL
-  results <- cbind(file_name, group_name, author, results)
-  results$results <- sum(unlist(results[, -c(1:2)]))
+  if(group == TRUE){
+    group_name <- substring(work[grep("group", work)][1],
+                            9,
+                            nchar(work[grep("author", work)])-1)
+    results <- cbind(file_name, group_name, author, results)
+    results$results <- sum(unlist(results[, -c(1:3)]))
+  } else {
+    results <- cbind(file_name, author, results)
+    results$results <- sum(unlist(results[, -c(1:2)]))
+  }
   results
 }
