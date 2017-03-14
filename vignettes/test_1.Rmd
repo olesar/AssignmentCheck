@@ -1,6 +1,7 @@
 ---
 title: "test"
 author: "Tom Sawyer"
+group: "1 group"
 date: '14-03-2017'
 output: html_document
 ---

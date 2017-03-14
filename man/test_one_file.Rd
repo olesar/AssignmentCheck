@@ -5,7 +5,7 @@
 \title{Test all tasks in rmarkdown file
 This function takes a file, searches all kye_words using key_word_prefix argument and then tests associated with all keywords r chunks. Then function compare the results with the expected value and return a dataframe containing file name, author, check results and number of corrected answers.}
 \usage{
-test_one_file(expectations, file, keyword_prefix = "### ")
+test_one_file(expectations, file, keyword_prefix = "### ", group = FALSE)
 }
 \arguments{
 \item{expectations}{an expected value.}
@@ -13,6 +13,8 @@ test_one_file(expectations, file, keyword_prefix = "### ")
 \item{file}{an rmarkdown file or an r charactor vector.}
 
 \item{keyword_prefix}{a common part of all keywords. By default is "### ".}
+
+\item{group}{logical. If TRUE, function searches first line with the "group:" argument and returns it in the summary.}
 }
 \description{
 Test all tasks in rmarkdown file

@@ -1,6 +1,7 @@
 ---
 title: "test"
 author: "Amy Lawrence"
+group: "2 group"
 date: '14 марта 2017 г '
 output: html_document
 ---

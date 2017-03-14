@@ -1,6 +1,7 @@
 ---
 title: "test"
 author: "Huckleberry Finn"
+group: "1 group"
 date: '14-03-2017'
 output: html_document
 ---

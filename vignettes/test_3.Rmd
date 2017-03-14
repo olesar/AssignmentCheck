@@ -1,6 +1,7 @@
 ---
 title: "test"
 author: "Joe Harper"
+group: "2 group"
 date: '14-03-2017'
 output: html_document
 ---

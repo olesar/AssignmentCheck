@@ -4,6 +4,7 @@
 #' @param file an rmarkdown file or an r charactor vector.
 #' @param expectations an expected value.
 #' @param keyword_prefix a common part of all keywords. By default is "### ".
+#' @param group logical. If TRUE, function searches first line with the "group:" argument and returns it in the summary.
 #' @author George Moroz <agricolamz@gmail.com>
 #' @examples
 #' fit <- lm(mpg~cyl, mtcars)
@@ -11,7 +12,7 @@
 #' test_one_file(list(2+2, 42), test_1)
 #' @export
 
-test_one_file <- function(expectations, file, keyword_prefix = "### "){
+test_one_file <- function(expectations, file, keyword_prefix = "### ", group = FALSE){
   # is file just a name or a whole file? ------------------------------------
   if(length(file) == 1){
     work <- readLines(file)
@@ -21,7 +22,13 @@ test_one_file <- function(expectations, file, keyword_prefix = "### "){
     file_name <- deparse(substitute(file))
   }
 
-  author <- substring(work[grep("author", work)],
+  if(group == TRUE){
+    group_name <- substring(work[grep("group", work)][1],
+                            9,
+                            nchar(work[grep("author", work)])-1)
+  }
+
+  author <- substring(work[grep("author", work)][1],
                       10,
                       nchar(work[grep("author", work)])-1)
 
@@ -35,7 +42,7 @@ test_one_file <- function(expectations, file, keyword_prefix = "### "){
   results <- data.frame(t(data.frame(checks)))
   names(results) <- keywords
   rownames(results) <- NULL
-  results <- cbind(file_name, author, results)
+  results <- cbind(file_name, group_name, author, results)
   results$results <- sum(unlist(results[, -c(1:2)]))
   results
 }
