@@ -17,16 +17,3 @@ Get the development version from GitHub:
 install.packages("devtools")
 devtools::install_github("agricolamz/AssignmentCheck")
 ```
-
-Sometimes installation failed because of the absence of the package `crosstalk`. Just install it using command `install.packages("crosstalk")`.
-
-Load a library:
-```R
-library(lingtypology)
-```
-
-For a detailed tutorial see [GitHub pages](https://agricolamz.github.io/lingtypology/).
-
----
-
-[![](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
