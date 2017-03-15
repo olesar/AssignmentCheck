@@ -78,6 +78,10 @@ test_files(expectations = make_expectations("test_1.Rmd"))
 test_files(files = my_files, expectations = make_expectations(my_files[1]))
 ```
 
+It is important to note, that all checks doesn't create any variables in your working environment, so all students are checked independently. But you should know libraries that your students used, and turn them on in advance.
+
+If your students (and you) have some plots in your markdowns, they will be created in your Viewer, so it is nice practice to ask your students to write their names on the plots. There is no good way to check plot correctness, so I propose not to use automatic check here.
+
 ### 3. Citing `AssignmentCheck`
 It is important to cite R and R packages when you use them. For this purpose use the `citation` function in R:
 ```{r}
