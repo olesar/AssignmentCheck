@@ -1,5 +1,5 @@
 bibentry(bibtype = "Manual",
-         title = "AssignmentCheck: automatic check for your students",
+         title = "AssignmentCheck: automatic check of your students' assignments",
          author = person("George", "Moroz"),
          year = 2017,
          url = "https://github.com/agricolamz/AssignmentCheck")

@@ -1,10 +1,10 @@
 ---
-title: "`AssignmentCheck`: automatic check for your students"
+title: "`AssignmentCheck`: automatic check of your students' assignments"
 author: "George Moroz"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{`AssignmentCheck`: automatic check for your students}
+  %\VignetteIndexEntry{`AssignmentCheck`: automatic check of your students' assignments}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -14,7 +14,7 @@
 
 <meta name="date" content="2017-03-16" />
 
-<title>AssignmentCheck: automatic check for your students</title>
+<title>AssignmentCheck: automatic check of your students’ assignments</title>
 
 
 
@@ -68,7 +68,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<h1 class="title toc-ignore"><code>AssignmentCheck</code>: automatic check for your students</h1>
+<h1 class="title toc-ignore"><code>AssignmentCheck</code>: automatic check of your students’ assignments</h1>
 <h4 class="author"><em>George Moroz</em></h4>
 <h4 class="date"><em>2017-03-16</em></h4>
 
@@ -87,7 +87,7 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;agricola
 <p>Imagine that we have a directory with some files from our students</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>()</code></pre></div>
 <pre><code>## [1] &quot;test_1.Rmd&quot; &quot;test_2.Rmd&quot; &quot;test_3.Rmd&quot; &quot;test_4.Rmd&quot; &quot;test.txt&quot;</code></pre>
-<p>As you can see, there are <code>.Rmd</code> files, and one <code>.txt</code> file. These files have awfull names, but believe me: even if you ask your student to name files during some pattern, you will recieve a couple files with nasty names. Lets look inside of one of them:</p>
+<p>As you can see, there are <code>.Rmd</code> files and one <code>.txt</code> file. These files have awfull names, but believe me: even if you ask your student to name files in line with some pattern, you will recieve a couple files with nasty names. Lets look inside of one of them:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(<span class="st">&quot;test_1.Rmd&quot;</span>)</code></pre></div>
 <pre><code>##  [1] &quot;---&quot;                               
 ##  [2] &quot;title: \&quot;test\&quot;&quot;                   
@@ -121,7 +121,7 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;agricola
 ## [[2]]
 ## (Intercept)         cyl 
 ##    37.88458    -2.87579</code></pre>
-<p>So that correct answers you can provide to the <code>test_files</code>. This function takes all <code>.Rmd</code> files and check, whether <code>R</code> code in <code>R</code> chunks produces the same result that we expected. Our expectations should be provided via <code>list()</code>.</p>
+<p>So that correct answers you can provide to the <code>test_files</code> function. This function takes all <code>.Rmd</code> files and check, whether <code>R</code> code in <code>R</code> chunks produces the same result that we expected. Our expectations should be provided via <code>list()</code> object.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg~cyl, mtcars)
 <span class="kw">test_files</span>(<span class="dt">expectations =</span> <span class="kw">list</span>(<span class="dv">4</span>, fit$coefficients))</code></pre></div>
 <pre><code>##             author ### 1.1 ### 1.2 results  file_name
@@ -129,7 +129,7 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;agricola
 ## 2 Huckleberry Finn    TRUE    TRUE       2 test_2.Rmd
 ## 3       Joe Harper   FALSE    TRUE       1 test_3.Rmd
 ## 4     Amy Lawrence   FALSE   FALSE       0 test_4.Rmd</code></pre>
-<p>As you can see, there are students name from <code>name:</code> field, and summary on each student.</p>
+<p>As you can see, there are students’ name from <code>name:</code> field and summary for each student.</p>
 <p>There is a variable <code>keyword_prefix</code> that defines the common part of the keywords, so you can ask your students to put their answer code chunks after some keywords. By default <code>keyword_prefix</code> is <code>&quot;### &quot;</code>, so your students can write “### 1.1”, “### 1.2” and so on. But you can specify your own prefixes.</p>
 <p>If we combine both <code>test_files</code> and <code>make_expectations</code> functions we can get the same summary for all students:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test_files</span>(<span class="dt">expectations =</span> <span class="kw">make_expectations</span>(<span class="st">&quot;test_1.Rmd&quot;</span>))</code></pre></div>
@@ -147,7 +147,7 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;agricola
 ## 4     Amy Lawrence    2 group   FALSE   FALSE       0 test_4.Rmd</code></pre>
 <p>It is important to note, that all checks don’t create any variables in your working environment, so all students are checked independently. But you should know libraries that your students used and turn them on in advance.</p>
 <p>If your students (and you) have some plots in your markdowns, they will be created in your Viewer, so it is nice practice to ask your students to write their names on the plots. There is no good way to check plot correctness, so I propose not to use automatic check here.</p>
-<p>When you get the result metrix from <code>test_files()</code> function you can use <code>mistaken_tasks()</code> function for generating the new rmarkdown file with fragments of students’ works.</p>
+<p>When you get the result metrix from the <code>test_files()</code> function you can use the <code>mistaken_tasks()</code> function for generating a new rmarkdown file with fragments of students’ works.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">test_files</span>(<span class="dt">expectations =</span> <span class="kw">make_expectations</span>(<span class="st">&quot;test_1.Rmd&quot;</span>))
 <span class="kw">mistaken_tasks</span>(result, <span class="dt">write_file =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>##  [1] &quot;---&quot;                        &quot;date: \&quot;`r Sys.Date()`\&quot;&quot;  
@@ -162,7 +162,7 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;agricola
 ## [19] &quot;Tro-lo-lo&quot;                  &quot;```{r}&quot;                    
 ## [21] &quot;fit &lt;- lm(mpg~cyl, mtcars)&quot; &quot;fit$coefficients+1&quot;        
 ## [23] &quot;```&quot;</code></pre>
-<p>As you see, It is a new rmarkdown file, where all fragments with unexpected values are named after a student that produce that part of rmarkdown. If you use <code>write_file = TRUE</code> it creates a file <code>&quot;mistaken_tasks.Rmd&quot;</code> in your working directory. You can open it using <code>file.edit(&quot;mistaken_tasks.Rmd&quot;)</code> command.</p>
+<p>As you see, It is the new rmarkdown file, where all fragments with unexpected values are named after a student that produced this part of rmarkdown. If you use <code>write_file = TRUE</code> it will creat a file <code>&quot;mistaken_tasks.Rmd&quot;</code> in your working directory. You can open it using <code>file.edit(&quot;mistaken_tasks.Rmd&quot;)</code> command.</p>
 </div>
 <div id="citing-assignmentcheck" class="section level3">
 <h3>3. Citing <code>AssignmentCheck</code></h3>
