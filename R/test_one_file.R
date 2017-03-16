@@ -39,7 +39,7 @@ test_one_file <- function(expectations, file, keyword_prefix = "### ", group = F
   if(group == TRUE){
     group_name <- substring(work[grep("group", work)][1],
                             9,
-                            nchar(work[grep("author", work)])-1)
+                            nchar(work[grep("group", work)])-1)
     results <- cbind.data.frame(author, group_name, results, file_name, stringsAsFactors = FALSE)
     results$results <- sum(unlist(results[, -c(1:2, length(results))]))
   } else {

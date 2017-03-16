@@ -13,8 +13,6 @@ mistaken_tasks(results, keyword_prefix = "### ", write_file = TRUE,
 \item{keyword_prefix}{a common part of all keywords. By default is "### ".}
 
 \item{write_file}{logical. If TRUE, writes the created rmarkdown to the working directory.}
-
-\item{show_file}{logical. If TRUE, opens in RStudio the created rmarkdown.}
 }
 \description{
 This function takes a results of test_files() function and writes in working directory an rmarkdown containing all mistaken tasks made by students.

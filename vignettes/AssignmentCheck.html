@@ -12,7 +12,7 @@
 
 <meta name="author" content="George Moroz" />
 
-<meta name="date" content="2017-03-15" />
+<meta name="date" content="2017-03-16" />
 
 <title>AssignmentCheck: automatic check for your students</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore"><code>AssignmentCheck</code>: automatic check for your students</h1>
 <h4 class="author"><em>George Moroz</em></h4>
-<h4 class="date"><em>2017-03-15</em></h4>
+<h4 class="date"><em>2017-03-16</em></h4>
 
 
 
@@ -103,13 +103,13 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;agricola
 ## [12] &quot;&quot;                                  
 ## [13] &quot;### 1.1&quot;                           
 ## [14] &quot;Tro-lo-lo&quot;                         
-## [15] &quot;```{r pressure, echo=FALSE}&quot;       
+## [15] &quot;```{r}&quot;                            
 ## [16] &quot;2+2&quot;                               
 ## [17] &quot;```&quot;                               
 ## [18] &quot;&quot;                                  
 ## [19] &quot;### 1.2&quot;                           
 ## [20] &quot;Tro-lo-lo&quot;                         
-## [21] &quot;```{r pressure, echo=FALSE}&quot;       
+## [21] &quot;```{r}&quot;                            
 ## [22] &quot;fit &lt;- lm(mpg~cyl, mtcars)&quot;        
 ## [23] &quot;fit$coefficients&quot;                  
 ## [24] &quot;```&quot;</code></pre>
@@ -124,22 +124,45 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;agricola
 <p>So that correct answers you can provide to the <code>test_files</code>. This function takes all <code>.Rmd</code> files and check, whether <code>R</code> code in <code>R</code> chunks produces the same result that we expected. Our expectations should be provided via <code>list()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg~cyl, mtcars)
 <span class="kw">test_files</span>(<span class="dt">expectations =</span> <span class="kw">list</span>(<span class="dv">4</span>, fit$coefficients))</code></pre></div>
-<pre><code>##    file_name           author ### 1.1 ### 1.2 results
-## 1 test_1.Rmd       Tom Sawyer    TRUE    TRUE       2
-## 2 test_2.Rmd Huckleberry Finn    TRUE    TRUE       2
-## 3 test_3.Rmd       Joe Harper   FALSE    TRUE       1
-## 4 test_4.Rmd     Amy Lawrence   FALSE    TRUE       1</code></pre>
+<pre><code>##             author ### 1.1 ### 1.2 results  file_name
+## 1       Tom Sawyer    TRUE    TRUE       2 test_1.Rmd
+## 2 Huckleberry Finn    TRUE    TRUE       2 test_2.Rmd
+## 3       Joe Harper   FALSE    TRUE       1 test_3.Rmd
+## 4     Amy Lawrence   FALSE   FALSE       0 test_4.Rmd</code></pre>
 <p>As you can see, there are students name from <code>name:</code> field, and summary on each student.</p>
 <p>There is a variable <code>keyword_prefix</code> that defines the common part of the keywords, so you can ask your students to put their answer code chunks after some keywords. By default <code>keyword_prefix</code> is <code>&quot;### &quot;</code>, so your students can write “### 1.1”, “### 1.2” and so on. But you can specify your own prefixes.</p>
 <p>If we combine both <code>test_files</code> and <code>make_expectations</code> functions we can get the same summary for all students:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test_files</span>(<span class="dt">expectations =</span> <span class="kw">make_expectations</span>(<span class="st">&quot;test_1.Rmd&quot;</span>))</code></pre></div>
-<pre><code>##    file_name           author ### 1.1 ### 1.2 results
-## 1 test_1.Rmd       Tom Sawyer    TRUE    TRUE       2
-## 2 test_2.Rmd Huckleberry Finn    TRUE    TRUE       2
-## 3 test_3.Rmd       Joe Harper   FALSE    TRUE       1
-## 4 test_4.Rmd     Amy Lawrence   FALSE    TRUE       1</code></pre>
-<p>It is important to note, that all checks doesn’t create any variables in your working environment, so all students are checked independently. But you should know libraries that your students used, and turn them on in advance.</p>
+<pre><code>##             author ### 1.1 ### 1.2 results  file_name
+## 1       Tom Sawyer    TRUE    TRUE       2 test_1.Rmd
+## 2 Huckleberry Finn    TRUE    TRUE       2 test_2.Rmd
+## 3       Joe Harper   FALSE    TRUE       1 test_3.Rmd
+## 4     Amy Lawrence   FALSE   FALSE       0 test_4.Rmd</code></pre>
+<p>Sometimes it is nice to know the students’ group, so just ask them to write “group: …” (see <code>readLines(&quot;test_1.Rmd&quot;)</code> example below) in the rmarkdown header and use <code>group</code> argument.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">test_files</span>(<span class="dt">expectations =</span> <span class="kw">make_expectations</span>(<span class="st">&quot;test_1.Rmd&quot;</span>, <span class="dt">group =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>##             author group_name ### 1.1 ### 1.2 results  file_name
+## 1       Tom Sawyer    1 group    TRUE    TRUE       2 test_1.Rmd
+## 2 Huckleberry Finn    1 group    TRUE    TRUE       2 test_2.Rmd
+## 3       Joe Harper    2 group   FALSE    TRUE       1 test_3.Rmd
+## 4     Amy Lawrence    2 group   FALSE   FALSE       0 test_4.Rmd</code></pre>
+<p>It is important to note, that all checks don’t create any variables in your working environment, so all students are checked independently. But you should know libraries that your students used and turn them on in advance.</p>
 <p>If your students (and you) have some plots in your markdowns, they will be created in your Viewer, so it is nice practice to ask your students to write their names on the plots. There is no good way to check plot correctness, so I propose not to use automatic check here.</p>
+<p>When you get the result metrix from <code>test_files()</code> function you can use <code>mistaken_tasks()</code> function for generating the new rmarkdown file with fragments of students’ works.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">test_files</span>(<span class="dt">expectations =</span> <span class="kw">make_expectations</span>(<span class="st">&quot;test_1.Rmd&quot;</span>))
+<span class="kw">mistaken_tasks</span>(result, <span class="dt">write_file =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>##  [1] &quot;---&quot;                        &quot;date: \&quot;`r Sys.Date()`\&quot;&quot;  
+##  [3] &quot;output: html_document&quot;      &quot;---&quot;                       
+##  [5] &quot;&quot;                           &quot;### 1.1 Joe Harper&quot;        
+##  [7] &quot;Tro-lo-lo&quot;                  &quot;```{r}&quot;                    
+##  [9] &quot;2+3&quot;                        &quot;```&quot;                       
+## [11] &quot;&quot;                           &quot;### 1.1 Amy Lawrence&quot;      
+## [13] &quot;Tro-lo-lo&quot;                  &quot;```{r}&quot;                    
+## [15] &quot;2+6&quot;                        &quot;```&quot;                       
+## [17] &quot;&quot;                           &quot;### 1.2 Amy Lawrence&quot;      
+## [19] &quot;Tro-lo-lo&quot;                  &quot;```{r}&quot;                    
+## [21] &quot;fit &lt;- lm(mpg~cyl, mtcars)&quot; &quot;fit$coefficients+1&quot;        
+## [23] &quot;```&quot;</code></pre>
+<p>As you see, It is a new rmarkdown file, where all fragments with unexpected values are named after a student that produce that part of rmarkdown. If you use <code>write_file = TRUE</code> it creates a file <code>&quot;mistaken_tasks.Rmd&quot;</code> in your working directory. You can open it using <code>file.edit(&quot;mistaken_tasks.Rmd&quot;)</code> command.</p>
 </div>
 <div id="citing-assignmentcheck" class="section level3">
 <h3>3. Citing <code>AssignmentCheck</code></h3>

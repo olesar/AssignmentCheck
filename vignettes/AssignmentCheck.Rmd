@@ -62,7 +62,9 @@ test_files(expectations = list(4, fit$coefficients))
 ```
 ```{r, echo=FALSE}
 fit <- lm(mpg~cyl, mtcars)
-test_files(files = my_files, expectations = list(4, fit$coefficients))
+show <- test_files(files = my_files, expectations = list(4, fit$coefficients))
+show <- cbind.data.frame(show[,-5], file_name = c("test_1.Rmd", "test_2.Rmd", "test_3.Rmd", "test_4.Rmd"))
+show
 ```
 
 As you can see, there are students name from `name:` field, and summary on each student.
@@ -75,12 +77,38 @@ If we combine both `test_files` and `make_expectations` functions we can get the
 test_files(expectations = make_expectations("test_1.Rmd"))
 ```
 ```{r, echo=FALSE}
-test_files(files = my_files, expectations = make_expectations(my_files[1]))
+show <- test_files(files = my_files, expectations = make_expectations(my_files[1]))
+show <- cbind.data.frame(show[,-5], file_name = c("test_1.Rmd", "test_2.Rmd", "test_3.Rmd", "test_4.Rmd"))
+show
 ```
 
-It is important to note, that all checks doesn't create any variables in your working environment, so all students are checked independently. But you should know libraries that your students used, and turn them on in advance.
+Sometimes it is nice to know the students' group, so just ask them to write "group: ..." (see `readLines("test_1.Rmd")` example below) in the rmarkdown header and use `group` argument.
+
+```{r, eval=FALSE}
+test_files(expectations = make_expectations("test_1.Rmd", group = TRUE))
+```
+```{r, echo=FALSE}
+show <- test_files(files = my_files, expectations = make_expectations(my_files[1]), group = TRUE)
+show <- cbind.data.frame(show[,-6], file_name = c("test_1.Rmd", "test_2.Rmd", "test_3.Rmd", "test_4.Rmd"))
+show
+```
+
+It is important to note, that all checks don't create any variables in your working environment, so all students are checked independently. But you should know libraries that your students used and turn them on in advance.
 
 If your students (and you) have some plots in your markdowns, they will be created in your Viewer, so it is nice practice to ask your students to write their names on the plots. There is no good way to check plot correctness, so I propose not to use automatic check here.
+
+When you get the result metrix from `test_files()` function you can use `mistaken_tasks()` function for generating the new rmarkdown file with fragments of students' works.
+
+```{r, eval=FALSE}
+result <- test_files(expectations = make_expectations("test_1.Rmd"))
+mistaken_tasks(result, write_file = FALSE)
+```
+```{r, echo=FALSE}
+show <- test_files(files = my_files, expectations = make_expectations(my_files[1]))
+mistaken_tasks(show, write_file = FALSE)
+```
+
+As you see, It is a new rmarkdown file, where all fragments with unexpected values are named after a student that produce that part of rmarkdown. If you use `write_file = TRUE` it creates a file `"mistaken_tasks.Rmd"` in your working directory. You can open it using `file.edit("mistaken_tasks.Rmd")` command.
 
 ### 3. Citing `AssignmentCheck`
 It is important to cite R and R packages when you use them. For this purpose use the `citation` function in R:

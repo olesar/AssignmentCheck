@@ -36,13 +36,33 @@ make_expectations(my_files[1])
 
 ## ---- echo=FALSE---------------------------------------------------------
 fit <- lm(mpg~cyl, mtcars)
-test_files(files = my_files, expectations = list(4, fit$coefficients))
+show <- test_files(files = my_files, expectations = list(4, fit$coefficients))
+show <- cbind.data.frame(show[,-5], file_name = c("test_1.Rmd", "test_2.Rmd", "test_3.Rmd", "test_4.Rmd"))
+show
 
 ## ---- eval=FALSE---------------------------------------------------------
 #  test_files(expectations = make_expectations("test_1.Rmd"))
 
 ## ---- echo=FALSE---------------------------------------------------------
-test_files(files = my_files, expectations = make_expectations(my_files[1]))
+show <- test_files(files = my_files, expectations = make_expectations(my_files[1]))
+show <- cbind.data.frame(show[,-5], file_name = c("test_1.Rmd", "test_2.Rmd", "test_3.Rmd", "test_4.Rmd"))
+show
+
+## ---- eval=FALSE---------------------------------------------------------
+#  test_files(expectations = make_expectations("test_1.Rmd", group = TRUE))
+
+## ---- echo=FALSE---------------------------------------------------------
+show <- test_files(files = my_files, expectations = make_expectations(my_files[1]), group = TRUE)
+show <- cbind.data.frame(show[,-6], file_name = c("test_1.Rmd", "test_2.Rmd", "test_3.Rmd", "test_4.Rmd"))
+show
+
+## ---- eval=FALSE---------------------------------------------------------
+#  result <- test_files(expectations = make_expectations("test_1.Rmd"))
+#  mistaken_tasks(result, write_file = FALSE)
+
+## ---- echo=FALSE---------------------------------------------------------
+show <- test_files(files = my_files, expectations = make_expectations(my_files[1]))
+mistaken_tasks(show, write_file = FALSE)
 
 ## ------------------------------------------------------------------------
 citation("AssignmentCheck")
