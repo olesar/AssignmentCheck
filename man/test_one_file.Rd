@@ -18,11 +18,12 @@ test_one_file(expectations, file, keyword_prefix = "### ", group = FALSE)
 \description{
 This function takes a file, searches all kye_words using key_word_prefix argument and then tests associated with all keywords r chunks. Then function compare the results with the expected value and return a dataframe containing file name, author, check results and number of corrected answers.
 }
-\author{
-George Moroz <agricolamz@gmail.com>
-# @examples
+\examples{
 fit <- lm(mpg~cyl, mtcars)
 test_one_file(list(2+2, fit$coefficients), test_1)
 test_one_file(list(2+2, 42), test_1)
+}
+\author{
+George Moroz <agricolamz@gmail.com>
 }
 

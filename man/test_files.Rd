@@ -20,9 +20,15 @@ test_files(expectations, files = list.files(), keyword_prefix = "### ",
 This function takes all files in directory, searches all kye_words using key_word_prefix argument and then tests associated with all keywords r chunks. Then function compare the results with the expected value and return a dataframe containing file name, author, check results and number of corrected answers.
 }
 \examples{
-\dontrun{
+my_files <- c(
+system.file("extdata", "test_1.Rmd", package = "AssignmentCheck"),
+system.file("extdata", "test_2.Rmd", package = "AssignmentCheck"),
+system.file("extdata", "test_3.Rmd", package = "AssignmentCheck"),
+system.file("extdata", "test_4.Rmd", package = "AssignmentCheck")
+)
 fit <- lm(mpg~cyl, mtcars)
-test_files(expectations = list(2+2, fit$coefficients))}
+test_files(expectations = list(2+2, fit$coefficients), files = my_files)
+
 }
 \author{
 George Moroz <agricolamz@gmail.com>

@@ -12,13 +12,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### 1.1
 Tro-lo-lo
-```{r pressure, echo=FALSE}
+```{r}
 2+2
 ```
 
 ### 1.2
 Tro-lo-lo
-```{r pressure, echo=FALSE}
+```{r}
 fit <- lm(mpg~cyl, mtcars)
 fit$coefficients
 ```

@@ -7,9 +7,15 @@
 #' @param group logical. If TRUE, function searches first line with the "group:" argument and returns it in the summary.
 #' @author George Moroz <agricolamz@gmail.com>
 #' @examples
-#' \dontrun{
+#' my_files <- c(
+#' system.file("extdata", "test_1.Rmd", package = "AssignmentCheck"),
+#' system.file("extdata", "test_2.Rmd", package = "AssignmentCheck"),
+#' system.file("extdata", "test_3.Rmd", package = "AssignmentCheck"),
+#' system.file("extdata", "test_4.Rmd", package = "AssignmentCheck")
+#' )
 #' fit <- lm(mpg~cyl, mtcars)
-#' test_files(expectations = list(2+2, fit$coefficients))}
+#' test_files(expectations = list(2+2, fit$coefficients), files = my_files)
+#'
 #' @export
 
 test_files <- function(expectations, files = list.files(), keyword_prefix = "### ", group = FALSE) {
