@@ -31,6 +31,7 @@ test_files <- function(expectations, files = list.files(), keyword_prefix = "###
     results <<- rbind.data.frame(results,
                                  test_one_file(file = x, expectations = expectations, group = group))
   })
+  file_name <- NULL # R CMD CHECK :(
   results <- cbind.data.frame(subset(results, select=-c(file_name)), file_name = results[,"file_name"], stringsAsFactors = FALSE)
   results
 }

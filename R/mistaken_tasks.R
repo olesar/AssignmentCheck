@@ -20,7 +20,7 @@
 #' @importFrom tidyr gather
 #' @importFrom utils file.edit
 
-mistaken_tasks <- function(results, keyword_prefix = "### ", write_file = TRUE, show_file = TRUE) {
+mistaken_tasks <- function(results, keyword_prefix = "### ", write_file = TRUE) {
   tasks <- correctness <- NULL # trick to control R CMD CHECK
       mistakes <- tidyr::gather(subset(results, select=-c(results)),
                            key = tasks, value = correctness,

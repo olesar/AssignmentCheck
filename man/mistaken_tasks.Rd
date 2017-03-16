@@ -4,8 +4,7 @@
 \alias{mistaken_tasks}
 \title{Creates rmarkdown from mestaken tasks}
 \usage{
-mistaken_tasks(results, keyword_prefix = "### ", write_file = TRUE,
-  show_file = TRUE)
+mistaken_tasks(results, keyword_prefix = "### ", write_file = TRUE)
 }
 \arguments{
 \item{results}{data frame with test_files() results}
