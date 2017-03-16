@@ -31,7 +31,7 @@ my_files <- c("test_1.Rmd", "test_2.Rmd", "test_3.Rmd", "test_4.Rmd", "test.txt"
 my_files
 ```
 
-As you can see, there are `.Rmd` files, and one `.txt` file. These files have awfull names, but believe me: even if you ask your student to name files during some pattern, you will recieve a couple files with nasty names. Lets look inside of one of them:
+As you can see, there are `.Rmd` files and one `.txt` file. These files have awfull names, but believe me: even if you ask your student to name files in line with some pattern, you will recieve a couple files with nasty names. Lets look inside of one of them:
 ```{r, eval=FALSE}
 readLines("test_1.Rmd")
 ```
@@ -54,7 +54,7 @@ make_expectations("test_1.Rmd")
 make_expectations(my_files[1])
 ```
 
-So that correct answers you can provide to the `test_files`. This function takes all `.Rmd` files and check, whether `R` code in `R` chunks produces the same result that we expected. Our expectations should be provided via `list()`.
+So that correct answers you can provide to the `test_files` function. This function takes all `.Rmd` files and check, whether `R` code in `R` chunks produces the same result that we expected. Our expectations should be provided via `list()` object.
 
 ```{r, eval=FALSE}
 fit <- lm(mpg~cyl, mtcars)
@@ -67,7 +67,7 @@ show <- cbind.data.frame(show[,-5], file_name = c("test_1.Rmd", "test_2.Rmd", "t
 show
 ```
 
-As you can see, there are students name from `name:` field, and summary on each student.
+As you can see, there are students' name from `name:` field and summary for each student.
 
 There is a variable `keyword_prefix` that defines the common part of the keywords, so you can ask your students to put their answer code chunks after some keywords. By default `keyword_prefix` is `"### "`, so your students can write "### 1.1", "### 1.2" and so on. But you can specify your own prefixes.
 
@@ -97,7 +97,7 @@ It is important to note, that all checks don't create any variables in your work
 
 If your students (and you) have some plots in your markdowns, they will be created in your Viewer, so it is nice practice to ask your students to write their names on the plots. There is no good way to check plot correctness, so I propose not to use automatic check here.
 
-When you get the result metrix from `test_files()` function you can use `mistaken_tasks()` function for generating the new rmarkdown file with fragments of students' works.
+When you get the result metrix from the `test_files()` function you can use the `mistaken_tasks()` function for generating a new rmarkdown file with fragments of students' works.
 
 ```{r, eval=FALSE}
 result <- test_files(expectations = make_expectations("test_1.Rmd"))
@@ -108,7 +108,7 @@ show <- test_files(files = my_files, expectations = make_expectations(my_files[1
 mistaken_tasks(show, write_file = FALSE)
 ```
 
-As you see, It is a new rmarkdown file, where all fragments with unexpected values are named after a student that produce that part of rmarkdown. If you use `write_file = TRUE` it creates a file `"mistaken_tasks.Rmd"` in your working directory. You can open it using `file.edit("mistaken_tasks.Rmd")` command.
+As you see, It is the new rmarkdown file, where all fragments with unexpected values are named after a student that produced this part of rmarkdown. If you use `write_file = TRUE` it will creat a file `"mistaken_tasks.Rmd"` in your working directory. You can open it using `file.edit("mistaken_tasks.Rmd")` command.
 
 ### 3. Citing `AssignmentCheck`
 It is important to cite R and R packages when you use them. For this purpose use the `citation` function in R:
