@@ -7,7 +7,7 @@
 version](http://www.r-pkg.org/badges/version/AssignmentCheck)](https://cran.r-project.org/package=AssignmentCheck)
 
 
-This package is designed for student's assignments automatic test. I expect students to send me an rmarkdown with work and package automatically cheks all works.
+This package is designed for the automatic evaluation of students' assignments. I expect students to send me an Rmarkdown with their work, and the package will automatically check all their works.
 
 ## Installation
 
